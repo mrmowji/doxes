@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Londrina Solid', cursive;
+}
+
+body {
+  background: #ffd844;
+  color: #333;
+  padding: 50px 50px 80px 50px;
+}
+
+.fa {
+  vertical-align: middle;
+}
+
+.fa.left {
+  margin-right: 5px;
+}
+
+#app {
+  text-align: center;
+}
+
+#app > svg {
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+#board.light {
+  background: white;
+}
+
+#board.light .line {
+  cursor: pointer;
+  stroke: transparent;
+  transition: stroke 0.2s ease-out;
+}
+
+#board.light .line.drawn {
+  cursor: auto;
+  stroke: #333;
+  transition: stroke 0.2s ease-out;
+}
+
+#board.light .line:hover {
+  stroke: #333;
+  transition: stroke 0.2s ease-out;
+}
+
+#board.light .line.drawn:hover {
+  stroke: #333;
+  transition: stroke 0.2s ease-out;
+}
+
+#board.light .box {
+  fill: transparent;
+  height: 10px;
+  width: 10px;
+}
+
+#board.light .box.taken {
+  height: 100%;
+  transition: fill 0.2s ease-in, width 0.2s ease-in, height 0.2s ease-in;
+  width: 100%;
+}
+
+#board.light .dot {
+  fill: #333;
+}
+
+#app footer {
+  position: relative;
+  display: table;
+  top: -5px;
+  margin: auto;
+  text-align: left;
+  background: #ddd;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 15px 15px 20px 15px;
+  border-radius: 0 0 15px 15px;
+}
+
+#app footer > div {
+  display: table-cell;
+}
+
+#options {
+  text-align: right;
+}
+
+button {
+  background: crimson;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 3px 8px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+span.score {
+  background: #555;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 2px 10px;
+  transition: box-shadow 0.2s ease-in;
+}
+
+span.score.current {
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease-in, font-size 0.2s ease-in;
+}

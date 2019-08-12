@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Doxes</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet">
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Doxes</h1>
+    <svg id="board" class="light" :style="{ width: boardWidth + 'px', height: boardHeight + 'px' }">
+      <template v-for="(box, boxIndex) in boxes">
+        <svg :x="((box.column) * boxWidth) + boardPadding" :y="((box.row) * boxWidth) + boardPadding" :width="boxWidth" :height="boxWidth">
+          <rect class="box" :class="{ taken: box.isTaken }"
+                :style="{ fill: (box.player != -1 ? players[box.player].color : '') }"
+                :x="0" :y="0"></rect>
+        </svg>
+      </template>
+      <template v-for="(box, boxIndex) in boxes">
+        <template v-for="(line, lineIndex) in box.lines">
+          <line class="line" :class="{ drawn: (line.isDrawn) }"
+                :stroke-width="lineThickness" @click="drawLine(boxIndex, lineIndex)"
+                :x1="(box.column * boxWidth) + boardPadding + (line.x1 * boxWidth)" :y1="(box.row * boxWidth) + boardPadding + (line.y1 * boxWidth)"
+                :x2="(box.column * boxWidth) + boardPadding + (line.x2 * boxWidth)" :y2="(box.row * boxWidth) + boardPadding + (line.y2 * boxWidth)"></line>  
+        </template>
+      </template>
+      <template v-for="row in (numberOfRows + 1)">
+        <template v-for="column in (numberOfColumns + 1)">
+          <circle class="dot" :cx="((column - 1) * boxWidth) + boardPadding" :cy="((row - 1) * boxWidth) + boardPadding" :r="(lineThickness / 2)"></circle>  
+        </template>
+      </template>
+    </svg>
+    <footer :style="{ width: boardWidth + 'px' }">
+      <div id="info">
+        <template v-for="(player, playerIndex) in players">
+          <span class="score" :class="{ current: (playerIndex == currentPlayerIndex) }" :style="{ color: 'white', background: (playerIndex == currentPlayerIndex ? players[playerIndex].color : '') }">{{ player.score }}</span>
+        </template>
+      </div>
+      <div id="options">
+        <button><span class="fa fa-cog left"></span>Settings</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="scripts/vue.min.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>
